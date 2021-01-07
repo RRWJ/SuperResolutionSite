@@ -1,0 +1,6 @@
+<form method="post">
+    {% csrf_token %}
+    <p>您确定要删除图片"{{ object }}"?</p>
+    <input type="submit" value="Confirm">
+    <a href="{{ view.get_success_url }}" class="btn btn-primary">取消</a>
+</form>

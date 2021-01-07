@@ -1,0 +1,236 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="基于django和深度学习的图像超分辨率处理网站" />
+	<meta name="author" content="任文佳" />
+
+	<title>{% block title %}{% endblock %}</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+
+	<!-- Custom fonts for this template -->
+	{% block css %}{% endblock %}
+	<link href="{% static 'fontawesome-free/css/all.min.css' %}" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+	<link
+		href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+		rel="stylesheet" />
+
+	<!-- Custom styles for this template -->
+	<link href="{% static 'bootstrap/css/index.min.css' %}" rel="stylesheet" />
+</head>
+
+<body id="page-top">
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+		<div class="container">
+			<a class="navbar-brand js-scroll-trigger" href="{% url 'home' %}">图像超分辨率在线处理网站</a>
+			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+				data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+				aria-label="Toggle navigation">
+				目录
+				<i class="fas fa-bars"></i>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link js-scroll-trigger" href="#about">关于</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link js-scroll-trigger" href="#projects">项目介绍</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link js-scroll-trigger" href="#signup">联系我们</a>
+					</li>
+					{% if user.is_authenticated %}
+					<li class="nav-item">
+						<a class="nav-link js-scroll-trigger" href="">
+							{{ user.username }}
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link js-scroll-trigger" href="{% url 'logout' %}">
+							退出登录
+						</a>
+					</li>
+					{% else %}
+					<li class="nav-item">
+						<a class="nav-link js-scroll-trigger" href="{% url 'login' %}">
+							登录
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link js-scroll-trigger" href="{% url 'signup' %}">
+							注册
+						</a>
+					</li>
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	{% block header %}
+	{% endblock %}
+
+	<main>
+		{% block content %}
+		{% endblock %}
+	</main>
+
+	{% block navigation %}
+	{% endblock %}
+
+
+	<!-- Projects Section -->
+	<section id="projects" class="projects-section bg-light">
+		<div class="container">
+			<!-- Featured Project Row -->
+			<div class="row align-items-center no-gutters mb-4 mb-lg-5">
+				<div class="col-xl-8 col-lg-7">
+					<img class="img-fluid mb-3 mb-lg-0" src="{% static 'img/bg-masthead.jpg' %}" alt="" />
+				</div>
+				<div class="col-xl-4 col-lg-5">
+					<div class="featured-text text-center text-lg-left">
+						<h4>图像超分辨率</h4>
+						<p class="text-black-50 mb-0">通过构造一个正向的观察模型使退化后的低分辨率图像能够更接近真实场景中的有退化低分辨率图像，
+							并且搭建了基于交替方向乘子算法的模糊图像超分辨重建模型，将图像去模糊过程与获取高质量特征图过程分离，获得了更好的模糊图像
+							超分辨重建效果。
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Project One Row -->
+			<div class="row justify-content-center no-gutters mb-5 mb-lg-0">
+				<div class="col-lg-6">
+					<img class="img-fluid" src="{% static 'img/demo_image1.png' %}" alt="" />
+				</div>
+				<div class="col-lg-6">
+					<div class="bg-black text-center h-100 project">
+						<div class="d-flex h-100">
+							<div class="project-text w-100 my-auto text-center text-lg-left">
+								<h4 class="text-white">训练数据集</h4>
+								<p class="mb-0 text-white-50">
+									DIV2K 数据集共包含 1000 张图像，其中 800 张训练图像，200 张测试图像。每张图像分辨率均达到 2K 分辨率，质
+									量清晰，包含丰富的纹理。数据集图像内容含盖了动物、植物、人物、风景和建筑
+									等各个类别。主要用于图像超分辨率模型的训练集。
+								</p>
+								<hr class="d-none d-lg-block mb-0 ml-0" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Project Two Row -->
+			<div class="row justify-content-center no-gutters">
+				<div class="col-lg-6">
+					<img class="img-fluid" src="{% static 'img/demo_image2.png' %}" alt="" />
+				</div>
+				<div class="col-lg-6 order-lg-first">
+					<div class="bg-black text-center h-100 project">
+						<div class="d-flex h-100">
+							<div class="project-text w-100 my-auto text-center text-lg-right">
+								<h4 class="text-white">测试数据集</h4>
+								<p class="mb-0 text-white-50">包括：Set5 数据集、Set14 数据集、BSD100 数据集、Urban100 数据集。
+									Set5 和 Set14 数据集是当前图像去噪声、去模糊和超分辨领域广泛使用的测试数据集。BSD100 数据集共包含 100 张图片，被广泛应用于图像语义分割、图像质量评
+									价和图像处理领域。Urban100 数据集包含 100 张建筑图像，纹理丰富且富有规律，能够对模型有很好的测试效果。
+								</p>
+								<hr class="d-none d-lg-block mb-0 mr-0" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Signup Section -->
+	<section id="signup" class="signup-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-10 col-lg-8 mx-auto text-center">
+					<i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
+					<h2 class="text-white mb-5">订阅以接收更新！</h2>
+
+					<form class="form-inline d-flex">
+						<input type="email" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail"
+							placeholder="请输入电子邮箱地址..." />
+						<button type="submit" class="btn btn-primary mx-auto">
+							订阅
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Contact Section -->
+	<section class="contact-section bg-black">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 mb-3 mb-md-0">
+					<div class="card py-4 h-100">
+						<div class="card-body text-center">
+							<i class="fas fa-map-marked-alt text-primary mb-2"></i>
+							<h4 class="text-uppercase m-0">Designer</h4>
+							<hr class="my-4" />
+							<div class="small text-black-50">任文佳</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-4 mb-3 mb-md-0">
+					<div class="card py-4 h-100">
+						<div class="card-body text-center">
+							<i class="fas fa-envelope text-primary mb-2"></i>
+							<h4 class="text-uppercase m-0">Email</h4>
+							<hr class="my-4" />
+							<div class="small text-black-50">
+									<a href="#">1143491102@qq.com</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-4 mb-3 mb-md-0">
+					<div class="card py-4 h-100">
+						<div class="card-body text-center">
+							<i class="fas fa-mobile-alt text-primary mb-2"></i>
+							<h4 class="text-uppercase m-0">Phone</h4>
+							<hr class="my-4" />
+							<div class="small text-black-50">151****0186</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer class="bg-black small text-center text-white-50">
+		<div class="container">
+			Copyright &copy; 任文佳 2020
+		</div>
+	</footer>
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="{% static 'bootstrap/jquery/jquery.min.js' %}"></script>
+	<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+	<!-- Plugin JavaScript -->
+	<script src="{% static 'bootstrap/jquery-easing/jquery.easing.min.js' %}"></script>
+
+	<!-- Custom scripts for this template -->
+	<script src="{% static 'bootstrap/js/index.min.js' %}"></script>
+</body>
+
+</html>
